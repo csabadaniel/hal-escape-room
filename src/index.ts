@@ -13,6 +13,11 @@ app.get('/', (req: Request, res: Response) => {
 	res.json(halResponse);
 });
 
-app.listen(PORT, () => {
-	console.log(`HAL Escape Room is running on port ${PORT}`);
-});
+
+if (require.main === module) {
+	app.listen(PORT, () => {
+		console.log(`HAL Escape Room is running on port ${PORT}`);
+	});
+}
+
+export default app;
