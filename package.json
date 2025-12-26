@@ -1,0 +1,21 @@
+{
+  "name": "hal-escape-room",
+  "version": "1.0.0",
+  "description": "This project is a proof of concept for an API-based escape room game. The core idea is to create an interactive experience where players must explore and solve puzzles solely through a discoverable API, without any traditional user interface.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csabadaniel/hal-escape-room.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/csabadaniel/hal-escape-room/issues"
+  },
+  "homepage": "https://github.com/csabadaniel/hal-escape-room#readme"
+}
