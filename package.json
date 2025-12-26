@@ -17,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/csabadaniel/hal-escape-room/issues"
   },
-  "homepage": "https://github.com/csabadaniel/hal-escape-room#readme"
+  "homepage": "https://github.com/csabadaniel/hal-escape-room#readme",
+  "dependencies": {
+    "halson": "^3.1.0",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.16"
+  }
 }
