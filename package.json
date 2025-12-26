@@ -4,7 +4,10 @@
   "description": "This project is a proof of concept for an API-based escape room game. The core idea is to create an interactive experience where players must explore and solve puzzles solely through a discoverable API, without any traditional user interface.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc --build",
+    "start": "nohup node dist/index.js > app.log 2>&1 & echo $! > app.pid",
+    "stop": "kill $(cat app.pid) && rm app.pid",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
