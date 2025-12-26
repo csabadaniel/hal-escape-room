@@ -1,11 +1,16 @@
 
 import express, { Request, Response } from 'express';
+import halson from 'halson';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req: Request, res: Response) => {
-	res.send('HAL Escape Room is running!');
+	const halResponse = halson({
+		message: 'HAL Escape Room is running!'
+	})
+		.addLink('self', '/');
+	res.json(halResponse);
 });
 
 app.listen(PORT, () => {
