@@ -5,14 +5,11 @@ import halson from 'halson';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req: Request, res: Response) => {
-	const halResponse = halson({
-		message: 'HAL Escape Room is running!'
-	})
-		.addLink('self', '/');
-	res.json(halResponse);
+app.options('/', (req: Request, res: Response) => {
+	res.set('Allow', 'GET, OPTIONS');
+	const halResponse = halson({}).addLink('self', '/');
+	res.type('application/hal+json').json(halResponse);
 });
-
 
 if (require.main === module) {
 	app.listen(PORT, () => {
