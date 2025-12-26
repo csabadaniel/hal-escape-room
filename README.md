@@ -10,6 +10,7 @@ This project is a proof of concept for an API-based escape room game. The core i
 ## Technology Stack
 - Node.js
 - TypeScript
+- express
 - halson
 - vitest
 

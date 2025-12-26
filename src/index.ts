@@ -1,1 +1,13 @@
-console.log('HAL Escape Room is running!');
+
+import express, { Request, Response } from 'express';
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req: Request, res: Response) => {
+	res.send('HAL Escape Room is running!');
+});
+
+app.listen(PORT, () => {
+	console.log(`HAL Escape Room is running on port ${PORT}`);
+});
