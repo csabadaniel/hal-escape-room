@@ -14,7 +14,32 @@ This project is a proof of concept for an API-based escape room game. The core i
 - halson
 - vitest
 
+
 ## Build & Deployment
 - GitHub Actions
 - AWS Lambda
 - AWS SAM
+
+---
+
+## Running the Application
+
+### Build the app
+```
+npm run build
+```
+
+### Start the app (in the background)
+```
+npm run start
+```
+
+### Stop the app
+```
+npm run stop
+```
+
+### Run tests
+```
+npm test
+```
