@@ -24,12 +24,14 @@ describe('OPTIONS /', () => {
 });
 
 describe('GET / (unauthenticated)', () => {
-  it('should return access denied in HAL format', async () => {
+  it('should return access denied in HAL format and set WWW-Authenticate header', async () => {
     const res = await request(app).get('/');
     expect(res.status).toBe(status.Unauthorized);
     expectHalResponse(res, '/');
     expect(res.body).toHaveProperty('error');
     expect(res.body.error.toLowerCase()).toContain('access denied');
+    // Check for WWW-Authenticate header
+    expect(res.header['www-authenticate']).toBe('Basic realm="HAL Escape Room"');
   });
 });
 

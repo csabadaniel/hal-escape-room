@@ -22,6 +22,7 @@ app.options('/', (req: Request, res: Response) => {
 app.get('/', (req: Request, res: Response) => {
   if (!isBasicAuthValid(req)) {
     return res.status(status.Unauthorized)
+      .set('WWW-Authenticate', 'Basic realm="HAL Escape Room"')
       .type(HAL_CONTENT_TYPE)
       .json(halson({ error: 'Access denied' }).addLink('self', '/'));
   } else {
