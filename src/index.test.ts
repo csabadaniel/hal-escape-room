@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import request from 'supertest';
 import app, { HAL_CONTENT_TYPE } from './index';
+import { GAME_USERNAME, GAME_PASSWORD } from './game-credentials';
 import { status, header, method } from '@poppanator/http-constants';
 
 function expectHalResponse(res: any, href: string) {
@@ -37,8 +38,8 @@ describe('GET / (unauthenticated)', () => {
 
 describe('GET / (authenticated)', () => {
   it('should return a HAL-compliant response with embedded service resources', async () => {
-    const username = 'john.smith@example.com';
-    const password = 'S3cr3t!';
+    const username = GAME_USERNAME;
+    const password = GAME_PASSWORD;
     const res = await request(app)
       .get('/')
       .auth(username, password);

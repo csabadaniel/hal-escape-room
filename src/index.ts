@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import halson from 'halson';
 import { status, header, method } from '@poppanator/http-constants';
 import basicAuth from 'basic-auth';
+import { GAME_USERNAME, GAME_PASSWORD } from './game-credentials';
 
 export const HAL_CONTENT_TYPE = 'application/hal+json';
 
@@ -10,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 function isBasicAuthValid(req: Request): boolean {
   const credentials = basicAuth(req);
-  return credentials?.name === 'john.smith@example.com' && credentials?.pass === 'S3cr3t!';
+  return credentials?.name === GAME_USERNAME && credentials?.pass === GAME_PASSWORD;
 }
 
 app.options('/', (req: Request, res: Response) => {
