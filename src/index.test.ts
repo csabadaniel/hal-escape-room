@@ -32,3 +32,32 @@ describe('GET / (unauthenticated)', () => {
     expect(res.body.error.toLowerCase()).toContain('access denied');
   });
 });
+
+
+describe('GET / (authenticated)', () => {
+  it('should return a HAL-compliant response with embedded service resources', async () => {
+    // Simulate basic auth
+    const username = 'john.smith@example.com';
+    const password = 'S3cr3t!';
+    const res = await request(app)
+      .get('/')
+      .auth(username, password);
+
+    expect(res.status).toBe(status.Ok);
+    expectHalResponse(res, '/');
+    expect(res.body).toHaveProperty('message');
+    expect(typeof res.body.message).toBe('string');
+    expect(res.body).toHaveProperty('_embedded');
+    expect(res.body._embedded).toHaveProperty('services');
+    const services = res.body._embedded.services;
+    expect(Array.isArray(services)).toBe(true);
+    expect(services.length).toBe(3);
+    for (const service of services) {
+      expect(typeof service.id).toBe('string');
+      expect(service.status).toBe('running');
+      expect(service).toHaveProperty('_links');
+      expect(service._links).toHaveProperty('self');
+      expect(typeof service._links.self.href).toBe('string');
+    }
+  });
+});
