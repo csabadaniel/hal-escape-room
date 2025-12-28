@@ -43,7 +43,7 @@ app.get('/', (req: Request, res: Response) => {
             )
           )
       );
-  };
+  }
 });
 
 if (require.main === module) {
