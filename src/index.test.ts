@@ -33,10 +33,8 @@ describe('GET / (unauthenticated)', () => {
   });
 });
 
-
 describe('GET / (authenticated)', () => {
   it('should return a HAL-compliant response with embedded service resources', async () => {
-    // Simulate basic auth
     const username = 'john.smith@example.com';
     const password = 'S3cr3t!';
     const res = await request(app)
