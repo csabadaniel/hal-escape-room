@@ -22,11 +22,14 @@
   },
   "homepage": "https://github.com/csabadaniel/hal-escape-room#readme",
   "dependencies": {
+    "@poppanator/http-constants": "^3.0.0",
+    "basic-auth": "^2.0.1",
     "express": "^5.2.1",
     "halson": "^3.1.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@types/basic-auth": "^1.1.8",
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.3",
     "@types/supertest": "^6.0.3",

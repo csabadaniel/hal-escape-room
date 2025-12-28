@@ -1,23 +1,55 @@
-
 import express, { Request, Response } from 'express';
 import halson from 'halson';
+import { status, header, method } from '@poppanator/http-constants';
+import basicAuth from 'basic-auth';
+import { GAME_USERNAME, GAME_PASSWORD } from './game-credentials';
+
+export const HAL_CONTENT_TYPE = 'application/hal+json';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req: Request, res: Response) => {
-	const halResponse = halson({
-		message: 'HAL Escape Room is running!'
-	})
-		.addLink('self', '/');
-	res.json(halResponse);
+function isBasicAuthValid(req: Request): boolean {
+  const credentials = basicAuth(req);
+  return credentials?.name === GAME_USERNAME && credentials?.pass === GAME_PASSWORD;
+}
+
+app.options('/', (req: Request, res: Response) => {
+  res.set(header.Allow, `${method.Get}, ${method.Options}`);
+  const halResponse = halson({}).addLink('self', '/');
+  res.status(status.Ok).type(HAL_CONTENT_TYPE).json(halResponse);
 });
 
+app.get('/', (req: Request, res: Response) => {
+  if (!isBasicAuthValid(req)) {
+    return res.status(status.Unauthorized)
+      .set('WWW-Authenticate', 'Basic realm="HAL Escape Room"')
+      .type(HAL_CONTENT_TYPE)
+      .json(halson({ error: 'Access denied' }).addLink('self', '/'));
+  } else {
+    return res.status(status.Ok)
+      .type(HAL_CONTENT_TYPE)
+      .json(
+        halson({
+          message: 'Congratulations! You have successfully solved the puzzle.'
+        })
+          .addLink('self', '/')
+          .addEmbed('services', 
+            [ 1, 2, 3 ].map(id =>
+              halson({
+                id: `service-${id}`,
+                status: 'running'
+              }).addLink('self', `/services/service-${id}`)
+            )
+          )
+      );
+  }
+});
 
 if (require.main === module) {
-	app.listen(PORT, () => {
-		console.log(`HAL Escape Room is running on port ${PORT}`);
-	});
+  app.listen(PORT, () => {
+    console.log(`HAL Escape Room is running on port ${PORT}`);
+  });
 }
 
 export default app;
