@@ -12,7 +12,7 @@ The support engineer provides you with the API endpoint:
 - **Username:** john.smith@example.com
 - **Password:** S3cr3t!
 
-He explains that your responsibility is to monitor the key services over the next few hours, checking every 5-10 minutes. He shares his screen, displaying the monitoring dashboard, and walks you through the process.
+The support engineer explains that your responsibility is to monitor the key services over the next few hours, checking every 5-10 minutes. They share their screen, displaying the monitoring dashboard, and walk you through the process.
 
 Suddenly, the call drops, and the support engineer goes offline. Now, without access to the monitoring dashboard, you can only rely on checking the API directly to ensure the services are running as expected.
 
